@@ -6,6 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+# vscode
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
 # Distribution / packaging
 .Python
 build/
@@ -102,3 +108,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Serverless directories
+.serverless
