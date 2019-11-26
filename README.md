@@ -11,6 +11,9 @@ sudo npm install serverless -g
 
 # Instalando autocomplete
 sls config tabcompletion install
+
+# instalando plugin do python
+sls plugin install -n serverless-python-requirements
 ```
 
 ## Ambiente de DEV
@@ -33,9 +36,26 @@ pipenv shell
 # Deploy na AWS
 sls deploy
 
-# Testar função
-sls invoke -f <function>
-
 # Excluir deploy
 sls remove
+```
+
+## Telegram
+
+```shell
+# Registrar webhook
+curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/setWebHook?url=<ENDPOINT_AWS>
+```
+
+## Comandos úteis
+
+```shell
+# Testar função na AWS
+sls invoke -f <function>
+
+# Testar função localmente
+sls invoke local -f <function>
+
+# Lint
+pylint funcs/*
 ```

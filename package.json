@@ -1,0 +1,9 @@
+{
+  "name": "busgv-bot",
+  "description": "Bot do Telegram que informa os horários de saída dos ônibus da Grande Vitória - ES",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-python-requirements": "^5.0.1"
+  }
+}

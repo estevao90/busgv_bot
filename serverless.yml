@@ -5,6 +5,8 @@ provider:
   runtime: python3.6
   stage: dev
   region: us-east-1
+  environment:
+    - TELEGRAM_BOT_TOKEN: ${env:TELEGRAM_BOT_TOKEN}
 
 package:
   exclude:
@@ -19,3 +21,6 @@ functions:
       - http:
           path: hello
           method: get
+
+plugins:
+  - serverless-python-requirements
