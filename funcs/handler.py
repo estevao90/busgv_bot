@@ -14,7 +14,6 @@ def enviar_mensagem(mensagem, chat_id):
 
 def hello(event, context):
     body = json.loads(event['body'])
-    print(body)
     chat_id = body['message']['chat']['id']
     resposta = body['message']['text']
     enviar_mensagem(resposta, chat_id)
