@@ -12,7 +12,7 @@ def enviar_mensagem(mensagem, chat_id):
     requests.get(url)
 
 
-def hello(event, context):
+def bot_webhook(event, context):
     body = json.loads(event['body'])
     chat_id = body['message']['chat']['id']
     resposta = body['message']['text']

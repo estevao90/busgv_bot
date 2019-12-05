@@ -45,6 +45,22 @@ sls remove
 ```shell
 # Registrar webhook
 curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/setWebHook?url=<ENDPOINT_AWS>
+
+# Verificar status do webhook
+curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getWebhookInfo
+```
+
+## Desenvolvimento
+
+```shell
+# Remover webhook
+curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/deleteWebhook
+
+# Obtendo mensagens
+curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates
+
+# Para obter apenas as novas mensagens
+curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates?offset=<result.update_id + 1>
 ```
 
 ## Comandos úteis

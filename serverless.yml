@@ -5,9 +5,9 @@ provider:
   runtime: python3.6
   stage: dev
   region: us-east-1
-  apiGateway:
-    logs:
-      restApi: true
+  # apiGateway:
+  #   logs:
+  #     restApi: true
   environment:
     TELEGRAM_BOT_TOKEN: ${env:TELEGRAM_BOT_TOKEN}
 
@@ -18,12 +18,12 @@ package:
     - funcs/**
 
 functions:
-  hello:
-    handler: funcs/handler.hello
+  bot_webhook:
+    handler: funcs/handler.bot_webhook
     events:
       - http:
-          path: hello
-          method: any
+          path: bot_webhook
+          method: POST
 
 plugins:
   - serverless-python-requirements
