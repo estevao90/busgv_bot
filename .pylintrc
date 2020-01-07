@@ -28,7 +28,12 @@ limit-inference-results=100
 
 # List of plugins (as comma separated values of python module names) to load,
 # usually to register additional checkers.
-load-plugins=
+load-plugins=pylint_quotes
+
+# pylint_quotes configurations
+string-quote=single-avoid-escape
+triple-quote=single
+docstring-quote=double
 
 # Pickle collected data for later comparisons.
 persistent=yes

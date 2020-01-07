@@ -2,13 +2,13 @@ import os
 import json
 import requests
 
-URL = "https://api.telegram.org/bot{}/".format(
+URL = 'https://api.telegram.org/bot{}/'.format(
     os.environ['TELEGRAM_BOT_TOKEN'])
 
 
 def enviar_mensagem(mensagem, chat_id):
-    texto = "Você disse: " + mensagem
-    url = URL + "sendMessage?text={}&chat_id={}".format(texto, chat_id)
+    texto = 'Você disse: ' + mensagem
+    url = URL + 'sendMessage?text={}&chat_id={}'.format(texto, chat_id)
     requests.get(url)
 
 

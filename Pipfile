@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 autopep8 = ">=1.4"
 pylint = ">=2.4"
+pylint-quotes = ">=0.2"
 
 [packages]
 requests = ">=2.22"
