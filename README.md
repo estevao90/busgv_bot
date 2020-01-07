@@ -73,5 +73,5 @@ sls invoke -f <function> [-p <event_file_path> -x <context_file_path>]
 sls invoke local -f <function> [-p <event_file_path> -x <context_file_path>]
 
 # Lint
-pylint funcs/*
+pylint funcs/* app/*
 ```

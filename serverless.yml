@@ -16,6 +16,7 @@ package:
     - '*'
   include:
     - funcs/**
+    - app/**
 
 functions:
   bot_webhook:
