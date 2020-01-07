@@ -60,17 +60,17 @@ curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/deleteWebhook
 curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates
 
 # Para obter apenas as novas mensagens
-curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates?offset=<result.update_id + 1>
+curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates?offset=<result[-1].update_id + 1>
 ```
 
 ## Comandos úteis
 
 ```shell
 # Testar função na AWS
-sls invoke -f <function>
+sls invoke -f <function> [-p <event_file_path> -x <context_file_path>]
 
 # Testar função localmente
-sls invoke local -f <function>
+sls invoke local -f <function> [-p <event_file_path> -x <context_file_path>]
 
 # Lint
 pylint funcs/*
