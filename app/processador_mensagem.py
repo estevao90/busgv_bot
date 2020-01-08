@@ -1,7 +1,8 @@
 """
 Realiza o processamento de uma mensagem recebida pelo bot
 """
-from app import telegram_proxy
+import re
+from app import telegram_proxy, gvbus_proxy
 
 
 class ProcessadorMensagem:
@@ -24,6 +25,7 @@ class ProcessadorMensagem:
             self.status_processamento = self.__STATUS_INTERNAL_ERROR
 
     def __exibir_ajuda(self):
+        # pylint: disable=W1401
         mensagem_ajuda = '''
 *\U0001F68C @busgv_bot*
 
@@ -49,6 +51,16 @@ https://github.com/estevao90/busgv\_bot
             self.__responder_chat(
                 'Ops, comando inválido. Para mais detalhes, utilize a /ajuda.')
 
+    def __processar_texto(self):
+        linha = self.obj_msg['text']
+        if not re.search('^[0-9]{3,4}$', linha):
+            self.__responder_chat(
+                'A linha é um número de 3 ou 4 algarismos. Para mais detalhes, utilize a /ajuda.')
+        else:
+            proxy_gvbus = gvbus_proxy.GvbusProxy(linha)
+            retorno = proxy_gvbus.obter_horario_contexto()
+            self.__responder_chat(retorno)
+
     def processar(self):
         if 'message' in self.mensagem:
             self.obj_msg = self.mensagem['message']
@@ -57,6 +69,11 @@ https://github.com/estevao90/busgv\_bot
             if ('entities' in self.obj_msg and
                     self.obj_msg['entities'][0]['type'] == 'bot_command'):
                 self.__processar_comando()
+            elif not 'text' in self.obj_msg:
+                self.__responder_chat(
+                    'Ops, tipo de mensagem não suportada. Para mais detalhes, utilize a /ajuda.')
+            else:
+                self.__processar_texto()
 
         else:
             self.status_processamento = self.__STATUS_BAD_REQUEST
