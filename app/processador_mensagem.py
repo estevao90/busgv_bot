@@ -35,7 +35,7 @@ Para saber os próximos 3 horários de partida, envie o número da linha, ex:
 `809`
 `1802`
 
-*\U0001F4D6 Código fonte:*
+*\U0001F4D6 Código-fonte:*
 https://github.com/estevao90/busgv\_bot
 
     '''
