@@ -2,6 +2,7 @@
 Realiza a interação entre o bot e o Telegram
 """
 import os
+import urllib.parse
 import requests
 
 
@@ -12,10 +13,13 @@ class TelegramProxy:
     @staticmethod
     def enviar_mensagem(mensagem, id_chat):
         try:
-            url = TelegramProxy.__TELEGRAM_URL + \
-                'sendMessage?text={}&chat_id={}&&parse_mode=markdown'.format(
-                    mensagem, id_chat)
-            requests.get(url, timeout=2)
-            return True
+            url_inicial = TelegramProxy.__TELEGRAM_URL + \
+                'sendMessage?parse_mode=markdown&disable_web_page_preview=true&'
+            params = {'chat_id': id_chat, 'text': mensagem}
+            url = '{}{}'.format(
+                url_inicial, urllib.parse.urlencode(params))
+
+            res = requests.get(url, timeout=2)
+            return res.status_code == 200
         except requests.exceptions.RequestException:
             return False
