@@ -9,8 +9,8 @@ Bot do Telegram que informa os horários de saída dos ônibus da Grande Vitóri
 # Necessário Node
 sudo npm install serverless -g
 
-# instalando plugin do python
-sls plugin install -n serverless-python-requirements
+# instalando plugins
+npm i
 
 # Instalando autocomplete
 sls config tabcompletion install
