@@ -8,7 +8,7 @@ class GvbusProxy:
     __GVBUS_URL = 'https://sistemas.es.gov.br/webservices/ceturb/onibus/api'
 
     def __init__(self, linha):
-        self.linha = linha
+        self.linha = int(linha)
         self.__horarios = None
 
     def __set_horarios_api(self):
@@ -37,4 +37,5 @@ class GvbusProxy:
 class Horarios:
     def __init__(self, json_api):
         for item in json_api:
-            print(item)
+            pass
+            # print(item)

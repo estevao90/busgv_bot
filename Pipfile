@@ -7,6 +7,9 @@ verify_ssl = true
 autopep8 = "~=1.4"
 pylint = "~=2.4"
 pylint-quotes = "~=0.2"
+pytest = "~=5.4"
+pytest-mock = "~=1.11"
+Faker = "~=2.0"
 
 [packages]
 requests = "~=2.22"

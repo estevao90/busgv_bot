@@ -58,8 +58,8 @@ https://github.com/estevao90/busgv\_bot
                 'A linha é um número de 3 ou 4 algarismos. Para mais detalhes, utilize a /ajuda.')
         else:
             proxy_gvbus = gvbus_proxy.GvbusProxy(linha)
-            retorno = proxy_gvbus.obter_horario_contexto()
-            self.__responder_chat(retorno)
+            resultado = proxy_gvbus.obter_horario_contexto()
+            self.__responder_chat(resultado)
 
     def processar(self):
         if 'message' in self.mensagem:

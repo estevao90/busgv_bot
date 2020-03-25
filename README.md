@@ -63,6 +63,16 @@ curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates
 curl https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates?offset=<result[-1].update_id + 1>
 ```
 
+### Testes
+
+```shell
+# Ambiente pipenv
+pipenv shell
+
+# Executando testes
+python -m pytest -v
+```
+
 ## Comandos úteis
 
 ```shell
