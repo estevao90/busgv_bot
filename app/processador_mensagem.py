@@ -3,9 +3,10 @@ Realiza o processamento de uma mensagem recebida pelo bot
 """
 import re
 from app import telegram_proxy, gvbus_proxy
+from app.contexto import Contexto
 
 
-class ProcessadorMensagem:
+class ProcessadorMensagem():
     __STATUS_OK = 200
     __STATUS_BAD_REQUEST = 400
     __STATUS_INTERNAL_ERROR = 500
@@ -58,7 +59,7 @@ https://github.com/estevao90/busgv\_bot
                 'A linha é um número de 3 ou 4 algarismos. Para mais detalhes, utilize a /ajuda.')
         else:
             proxy_gvbus = gvbus_proxy.GvbusProxy(linha)
-            resultado = proxy_gvbus.obter_horario_contexto()
+            resultado = proxy_gvbus.obter_horario_contexto(Contexto())
             self.__responder_chat(resultado)
 
     def processar(self):

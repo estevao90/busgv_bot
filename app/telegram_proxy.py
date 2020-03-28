@@ -6,7 +6,7 @@ import urllib.parse
 import requests
 
 
-class TelegramProxy:
+class TelegramProxy():
     __TELEGRAM_URL = 'https://api.telegram.org/bot{}/'.format(
         os.environ['TELEGRAM_BOT_TOKEN'])
 

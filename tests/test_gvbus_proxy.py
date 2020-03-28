@@ -5,16 +5,27 @@ from unittest import mock
 from tests.base import Base
 from tests.dados_teste import DadosTeste
 from app.gvbus_proxy import GvbusProxy
+from app.contexto import Contexto
 
 
 class TestGvbusProxy(Base):
 
-    @mock.patch('app.gvbus_proxy.GvbusProxy.__GVBUS_URL',
-                'https://sistemas.es.gov.br/webservices/ceturb/onibus/api/erro')
-    def test_erro_na_api(self):
+    @staticmethod
+    @mock.patch('app.gvbus_proxy.GvbusProxy._GvbusProxy__set_horarios_api',
+                return_value=False)
+    def test_erro_na_api(_):
         dados_teste = DadosTeste()
         gvbusproxy = GvbusProxy(dados_teste.get_random_linha_gvbus())
 
-        resultado = gvbusproxy.obter_horario_contexto()
+        resultado = gvbusproxy.obter_horario_contexto(Contexto())
 
-        assert resultado == 'teste'
+        assert resultado == 'Erro ao consultar horário na API da CETURB/ES.'
+
+    @staticmethod
+    def test_linha_inexistente():
+        dados_teste = DadosTeste()
+        gvbusproxy = GvbusProxy(dados_teste.get_random_linha_inexistente())
+
+        resultado = gvbusproxy.obter_horario_contexto(Contexto())
+
+        assert resultado == 'Linha não encontrada. Verifique o número no site da CETURB/ES.'

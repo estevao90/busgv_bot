@@ -11,8 +11,13 @@ class DadosTeste():
     def __init__(self):
         self.__faker = Faker()
 
-    def get_random_linha_gvbus(self):
+    @staticmethod
+    def get_random_linha_gvbus():
         regiao = random.randrange(500, 1000, 100)
         if regiao == 1000:
             return random.choice(DadosTeste.__LINHAS_SELETIVOS)
         return random.randrange(regiao + 3, regiao + 10)
+
+    @staticmethod
+    def get_random_linha_inexistente():
+        return random.randrange(0, 300, 1)

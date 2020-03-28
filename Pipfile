@@ -13,6 +13,7 @@ Faker = "~=2.0"
 
 [packages]
 requests = "~=2.22"
+pytz = ">=2019"
 
 [requires]
 python_version = "3.7"
