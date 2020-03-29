@@ -43,13 +43,13 @@ class Contexto():
     def is_dia_util(self):
         return (not self.feriado and
                 not self.atipicos and
-                self.dia_semana != 'sab' and
+                self.dia_semana != 'sáb' and
                 self.dia_semana != 'dom')
 
     def is_sabado(self):
         return (not self.feriado and
                 not self.atipicos and
-                self.dia_semana == 'sab')
+                self.dia_semana == 'sáb')
 
     def is_domingo(self):
         return (self.feriado or
