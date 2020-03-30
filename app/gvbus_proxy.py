@@ -32,7 +32,9 @@ class GvbusProxy():
             return 'Erro ao consultar horário na API da CETURB/ES.'
 
         if self.__horarios.is_inexistente():
-            return 'Linha não encontrada. Verifique o número no site da CETURB/ES.'
+            return '''
+            Linha não encontrada. Verifique o número correto no site da [CETURB/ES](https://ceturb.es.gov.br).
+            '''
 
         return self.__horarios.get_str_horario_contexto(contexto)
 

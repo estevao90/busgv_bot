@@ -1,13 +1,11 @@
 """
 Trata o contexto atual da busca
 """
-import locale
 from app.utils import get_str_data_formatada, is_feriado, is_atipico
 
 
 class Contexto():
     def __init__(self, qtde_horarios=3):
-        locale.setlocale(locale.LC_ALL, 'pt_BR')
         self.__orientacoes = set()
 
         self.qtde_horarios = qtde_horarios
@@ -43,17 +41,17 @@ class Contexto():
     def is_dia_util(self):
         return (not self.feriado and
                 not self.atipicos and
-                self.dia_semana != 'sáb' and
-                self.dia_semana != 'dom')
+                self.dia_semana != 'Sat' and
+                self.dia_semana != 'Sun')
 
     def is_sabado(self):
         return (not self.feriado and
                 not self.atipicos and
-                self.dia_semana == 'sáb')
+                self.dia_semana == 'Sat')
 
     def is_domingo(self):
         return (self.feriado or
-                self.dia_semana == 'dom')
+                self.dia_semana == 'Sun')
 
     def is_atipico(self):
         return self.atipicos

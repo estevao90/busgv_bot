@@ -28,7 +28,9 @@ class TestGvbusProxy(Base):
 
         resultado = gvbusproxy.obter_horario_contexto(Contexto())
 
-        assert resultado == 'Linha não encontrada. Verifique o número no site da CETURB/ES.'
+        assert resultado == '''
+            Linha não encontrada. Verifique o número correto no site da [CETURB/ES](https://ceturb.es.gov.br).
+            '''
 
     @staticmethod
     def test_linha_contexto():
