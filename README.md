@@ -2,6 +2,8 @@
 
 Bot do Telegram que informa os horários de saída dos ônibus da Grande Vitória - ES
 
+[![GitHub license](https://img.shields.io/github/license/estevao90/busgv_bot.svg)](https://github.com/estevao90/busgv_bot/blob/master/LICENSE)
+
 ## Instalação do Serverless Framework
 
 ```shell
