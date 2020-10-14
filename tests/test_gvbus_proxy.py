@@ -38,6 +38,6 @@ class TestGvbusProxy(Base):
         gvbusproxy = GvbusProxy(dados_teste.get_random_linha_gvbus())
 
         resultado = gvbusproxy.obter_horario_contexto(Contexto())
-        print(resultado)
 
-        assert False
+        assert 'Erro' not in resultado
+        assert 'Linha não encontrada' not in resultado

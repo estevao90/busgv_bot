@@ -56,12 +56,10 @@ class Horarios():
         self.__horarios_dia_util_ida = []
         self.__horarios_sabado_ida = []
         self.__horarios_domingo_ida = []
-        self.__horarios_atipico_ida = []
 
         self.__horarios_dia_util_volta = []
         self.__horarios_sabado_volta = []
         self.__horarios_domingo_volta = []
-        self.__horarios_atipico_volta = []
 
         for item in json_api:
             if not self.__desc_linha:
@@ -94,11 +92,6 @@ class Horarios():
                 self.__horarios_domingo_ida.append(hora)
             else:
                 self.__horarios_domingo_volta.append(hora)
-        elif item.get('TP_Horario') == 4:  # atípicos
-            if ida:
-                self.__horarios_atipico_ida.append(hora)
-            else:
-                self.__horarios_atipico_volta.append(hora)
 
     def get_descricao_linha(self):
         if self.is_inexistente():
@@ -118,7 +111,6 @@ class Horarios():
         {}
         {}
         {}
-        {}
         '''.format(self.get_descricao_linha(),
                    self.__desc_terminal_ida,
                    Horarios.get_desc_dia_contexto(
@@ -126,14 +118,11 @@ class Horarios():
                    Horarios.get_desc_dia_contexto(
                        'Sábado', contexto.is_sabado(), self.__horarios_sabado_ida, contexto),
                    Horarios.get_desc_dia_contexto(
-                       'Dom/Feriado', contexto.is_domingo(), self.__horarios_domingo_ida, contexto),
-                   Horarios.get_desc_dia_contexto(
-                       'Dia atípico', contexto.is_atipico(), self.__horarios_atipico_ida, contexto))
+                       'Dom/Feriado', contexto.is_domingo(), self.__horarios_domingo_ida, contexto))
 
         if not self.is_circular():
             str_horarios += '''
         \U0001F4CD {}
-        {}
         {}
         {}
         {}
@@ -146,9 +135,6 @@ class Horarios():
                        contexto),
                    Horarios.get_desc_dia_contexto(
                        'Dom/Feriado', contexto.is_domingo(), self.__horarios_domingo_volta,
-                       contexto),
-                   Horarios.get_desc_dia_contexto(
-                       'Dia atípico', contexto.is_atipico(), self.__horarios_atipico_volta,
                        contexto))
 
         return str_horarios
@@ -157,20 +143,18 @@ class Horarios():
         return '''
             linha: {}
             ida: {}
-            UTS: {}    SAB: {}    DOM: {}    ATP: {}
+            UTS: {}    SAB: {}    DOM: {}
             volta: {}
-            UTS: {}    SAB: {}    DOM: {}    ATP: {}
+            UTS: {}    SAB: {}    DOM: {}
             '''.format(self.get_descricao_linha(),
                        self.__desc_terminal_ida,
                        len(self.__horarios_dia_util_ida),
                        len(self.__horarios_sabado_ida),
                        len(self.__horarios_domingo_ida),
-                       len(self.__horarios_atipico_ida),
                        self.__desc_terminal_volta,
                        len(self.__horarios_dia_util_volta),
                        len(self.__horarios_sabado_volta),
-                       len(self.__horarios_domingo_volta),
-                       len(self.__horarios_atipico_volta))
+                       len(self.__horarios_domingo_volta))
 
 
 class HoraPartida():

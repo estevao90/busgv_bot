@@ -1,7 +1,7 @@
 """
 Trata o contexto atual da busca
 """
-from app.utils import get_str_data_formatada, is_feriado, is_atipico
+from app.utils import get_str_data_formatada, is_feriado
 
 
 class Contexto():
@@ -13,7 +13,6 @@ class Contexto():
         self.hora_atual = get_str_data_formatada('%H:%M')
         self.dia_semana = get_str_data_formatada('%a')
         self.feriado = is_feriado(get_str_data_formatada('%d/%m'))
-        self.atipicos = is_atipico(get_str_data_formatada('%d/%m'))
 
     def get_proximos_horarios(self, lista_horarios):
         if not lista_horarios:
@@ -40,27 +39,21 @@ class Contexto():
 
     def is_dia_util(self):
         return (not self.feriado and
-                not self.atipicos and
                 self.dia_semana != 'Sat' and
                 self.dia_semana != 'Sun')
 
     def is_sabado(self):
         return (not self.feriado and
-                not self.atipicos and
                 self.dia_semana == 'Sat')
 
     def is_domingo(self):
         return (self.feriado or
                 self.dia_semana == 'Sun')
 
-    def is_atipico(self):
-        return self.atipicos
-
     def is_valido(self):
         return (self.hora_atual and
                 self.dia_semana and
-                self.feriado is not None and
-                self.atipicos is not None)
+                self.feriado is not None)
 
     def __str__(self):
         return '''
@@ -68,9 +61,7 @@ class Contexto():
         hora_atual: {}
         dia_semana: {}
         feriado: {}
-        atípicos: {}
         '''.format(self.qtde_horarios,
                    self.hora_atual,
                    self.dia_semana,
-                   self.feriado,
-                   self.atipicos)
+                   self.feriado)
