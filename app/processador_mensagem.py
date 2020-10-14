@@ -34,7 +34,7 @@ Horário de partida dos ônibus que circulam na Grande Vitória, ES, Brasil.
 A fonte dos dados é o site da [CETURB/ES](https://ceturb.es.gov.br).
 
 *\U0001F449 Instruções:*
-Para saber os próximos 3 horários de partida, envie o número da linha, ex:
+Para saber os próximos horários de partida, envie o número da linha, ex:
 `809`
 `1802`
 
