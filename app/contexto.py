@@ -5,7 +5,7 @@ from app.utils import get_str_data_formatada, is_feriado
 
 
 class Contexto():
-    def __init__(self, qtde_horarios=3):
+    def __init__(self, qtde_horarios=4):
         self.__orientacoes = set()
 
         self.qtde_horarios = qtde_horarios
@@ -19,9 +19,17 @@ class Contexto():
             return '\U0001F6AB Não opera'
 
         # Próximos horários
-        prox_horarios = [partida
-                         for partida in lista_horarios
-                         if partida.hora > self.hora_atual][:self.qtde_horarios]
+        prox_horarios = []
+        for indice, partida in enumerate(lista_horarios):
+            if partida.hora > self.hora_atual:
+                prox_horarios.extend(
+                    lista_horarios[indice-1:indice+self.qtde_horarios])
+                break
+
+       # se vazio, adicionar último horário
+        if not prox_horarios:
+            prox_horarios.append(lista_horarios[-1])
+
         # adicionando itens, caso já tenha chegado ao fim da lista
         if len(prox_horarios) < self.qtde_horarios:
             prox_horarios.extend(
