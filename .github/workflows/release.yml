@@ -27,11 +27,20 @@ jobs:
           release_name: ${{ steps.tag.outputs.tag }}
           draft: false
           prerelease: false
-      - name: Serverless deploy
-        uses: serverless/github-action@master
+      - name: Set up Node
+        uses: actions/setup-node@v1
         with:
-          args: "serverless plugin install --name serverless-python-requirements && serverless deploy"
-          entrypoint: /bin/bash
+          node-version: 12
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          pip install pipenv
+      - name: Serverless deploy
+        uses: dhollerbach/github-action-serverless-with-python-requirements@master
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
