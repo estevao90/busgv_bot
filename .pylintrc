@@ -196,8 +196,8 @@ never-returning-functions=sys.exit
 
 # List of note tags to take in consideration, separated by a comma.
 notes=FIXME,
-      XXX,
-      TODO
+      XXX
+      
 
 
 [LOGGING]
