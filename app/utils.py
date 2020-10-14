@@ -25,11 +25,3 @@ def is_feriado(data):
     # Carnaval, Sexta-feira santa, Páscoa, Nossa senhora da penha e Corpus Christi
 
     return False
-
-
-def is_atipico(data):
-    """
-    data no formato dd/mm
-    """
-    # TODO Verificar se é um dia atípico
-    return False
