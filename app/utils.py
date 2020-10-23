@@ -6,7 +6,7 @@ from pytz import timezone
 from workalendar.america.brazil import BrazilVitoriaCity
 
 
-class BrazilGrandeVitoria(BrazilVitoriaCity):
+class BrazilGrandeVitoria(BrazilVitoriaCity):  # pylint: disable=too-many-ancestors
     include_servidor_publico = False
     include_fat_tuesday = True
     fat_tuesday_label = 'Carnaval'
