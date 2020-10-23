@@ -9,7 +9,7 @@ from workalendar.america.brazil import BrazilVitoriaCity
 class BrazilGrandeVitoria(BrazilVitoriaCity):
     include_servidor_publico = False
     include_fat_tuesday = True
-    fat_tuesday_label = "Carnaval"
+    fat_tuesday_label = 'Carnaval'
 
 
 __CAL = BrazilGrandeVitoria()
