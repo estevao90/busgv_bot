@@ -7,7 +7,6 @@ from tests.base import Base
 from app.utils import is_feriado
 
 
-
 @freeze_time("2020-01-01")
 class TestUtils(Base):
 
