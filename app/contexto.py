@@ -6,7 +6,7 @@ from app.utils import get_str_data_formatada, is_feriado
 
 class Contexto():
     def __init__(self, qtde_horarios=4):
-        self.__orientacoes = set()
+        self.orientacoes = set()
 
         self.qtde_horarios = qtde_horarios
 
@@ -39,8 +39,8 @@ class Contexto():
         for partida in prox_horarios:
             str_prox_horarios += partida.hora.strip()
             if partida.orientacao:
-                self.__orientacoes.add(partida.orientacao)
-                str_prox_horarios += partida.orientacao.strip()
+                self.orientacoes.add(partida.orientacao)
+                str_prox_horarios += partida.orientacao
             str_prox_horarios += ' '
 
         return str_prox_horarios
