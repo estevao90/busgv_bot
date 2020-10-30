@@ -14,12 +14,16 @@ class GvbusProxy():
     def __set_horarios_api(self):
         if self.__horarios is None:
             try:
-                url = '{}/{}/{}'.format(GvbusProxy.__GVBUS_URL,
-                                        'buscahorarios', self.linha)
-                res = requests.get(url, timeout=2)
+                url_horarios = '{}/{}/{}'.format(GvbusProxy.__GVBUS_URL,
+                                                 'buscahorarios', self.linha)
+                res_horarios = requests.get(url_horarios, timeout=2)
+                url_observacoes = '{}/{}/{}'.format(GvbusProxy.__GVBUS_URL,
+                                                    'BuscaHorarioObse', self.linha)
+                res_observacoes = requests.get(url_observacoes, timeout=2)
 
-                if res.status_code == 200:
-                    self.__horarios = Horarios(res.json(), self.linha)
+                if res_horarios.status_code == 200 and res_observacoes.status_code == 200:
+                    self.__horarios = Horarios(
+                        res_horarios.json(), res_observacoes.json(), self.linha)
                     return True
                 return False
             except requests.exceptions.RequestException:
@@ -46,7 +50,7 @@ class Horarios():
             dest=('*' if is_contexto else ''), str=str_dia,
             hrs=contexto.get_proximos_horarios(lista_horarios))
 
-    def __init__(self, json_api, linha):
+    def __init__(self, horarios, observacoes, linha):
         self.linha = linha
         self.__desc_linha = None
 
@@ -61,7 +65,9 @@ class Horarios():
         self.__horarios_sabado_volta = []
         self.__horarios_domingo_volta = []
 
-        for item in json_api:
+        self.__observacoes = {}
+
+        for item in horarios:
             if not self.__desc_linha:
                 self.__desc_linha = item.get('Descricao_Linha')
 
@@ -74,6 +80,10 @@ class Horarios():
                 if not self.__desc_terminal_volta:
                     self.__desc_terminal_volta = item.get('Desc_Terminal')
                 self.preencher_horarios(item, False)
+
+        for item in observacoes:
+            self.__observacoes[item.get('Tipo_Orientacao')] = item.get(
+                'Descricao_Orientacao')
 
     def preencher_horarios(self, item, ida=True):
         hora = HoraPartida(item.get('Hora_Saida'), item.get('Tipo_Orientacao'))
@@ -137,6 +147,14 @@ class Horarios():
                        'Dom/Feriado', contexto.is_domingo(), self.__horarios_domingo_volta,
                        contexto))
 
+        if contexto.orientacoes.intersection(self.__observacoes):
+            str_horarios += '''
+        \U00002757 OBSERVAÇÃO
+        '''
+            for item in sorted(contexto.orientacoes.intersection(self.__observacoes)):
+                str_horarios += '''{}: {}
+        '''.format(item, self.__observacoes[item])
+
         return str_horarios
 
     def __str__(self):
@@ -160,4 +178,4 @@ class Horarios():
 class HoraPartida():
     def __init__(self, hora, orientacao):
         self.hora = hora
-        self.orientacao = orientacao
+        self.orientacao = orientacao.strip()

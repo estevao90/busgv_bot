@@ -11,6 +11,7 @@ pytest = "~=6.1"
 pytest-mock = "~=3.3"
 Faker = "~=4.9"
 freezegun = "~=1.0.0"
+rope = "~=0.18.0"
 
 [packages]
 requests = "~=2.24"
