@@ -2,18 +2,15 @@ service: busgv-bot
 
 provider:
   name: aws
-  runtime: python3.7
+  runtime: python3.9
   stage: dev
   region: us-east-1
-  # apiGateway:
-  #   logs:
-  #     restApi: true
   environment:
     TELEGRAM_BOT_TOKEN: ${env:TELEGRAM_BOT_TOKEN}
 
 package:
   exclude:
-    - '*'
+    - "*"
   include:
     - funcs/**
     - app/**

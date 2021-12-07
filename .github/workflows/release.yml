@@ -3,10 +3,9 @@ name: Release
 on:
   push:
     tags:
-      - '*.*.*'
+      - "*.*.*"
 
 jobs:
-
   Release:
     runs-on: ubuntu-latest
 
@@ -34,7 +33,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.7
+          python-version: 3.9
       - name: Install dependencies
         run: |
           pip install pipenv

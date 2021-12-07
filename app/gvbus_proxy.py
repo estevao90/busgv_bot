@@ -14,11 +14,9 @@ class GvbusProxy():
     def __set_horarios_api(self):
         if self.__horarios is None:
             try:
-                url_horarios = '{}/{}/{}'.format(GvbusProxy.__GVBUS_URL,
-                                                 'buscahorarios', self.linha)
+                url_horarios = f'{GvbusProxy.__GVBUS_URL}/buscahorarios/{self.linha}'
                 res_horarios = requests.get(url_horarios, timeout=2)
-                url_observacoes = '{}/{}/{}'.format(GvbusProxy.__GVBUS_URL,
-                                                    'BuscaHorarioObse', self.linha)
+                url_observacoes = f'{GvbusProxy.__GVBUS_URL}/BuscaHorarioObse/{self.linha}'
                 res_observacoes = requests.get(url_observacoes, timeout=2)
 
                 if res_horarios.status_code == 200 and res_observacoes.status_code == 200:
@@ -105,8 +103,8 @@ class Horarios():
 
     def get_descricao_linha(self):
         if self.is_inexistente():
-            return '{} - Inexistente'.format(self.linha)
-        return '{} - {}'.format(self.linha, self.__desc_linha)
+            return f'{self.linha} - Inexistente'
+        return f'{self.linha} - {self.__desc_linha}'
 
     def is_inexistente(self):
         return self.__desc_linha is None
@@ -115,64 +113,49 @@ class Horarios():
         return self.__desc_terminal_volta is None
 
     def get_str_horario_contexto(self, contexto):
-        str_horarios = '''
-        *\U0001F68C {}*
-        \U0001F4CD {}
-        {}
-        {}
-        {}
-        '''.format(self.get_descricao_linha(),
-                   self.__desc_terminal_ida,
-                   Horarios.get_desc_dia_contexto(
-                       'Dia útil', contexto.is_dia_util(), self.__horarios_dia_util_ida, contexto),
-                   Horarios.get_desc_dia_contexto(
-                       'Sábado', contexto.is_sabado(), self.__horarios_sabado_ida, contexto),
-                   Horarios.get_desc_dia_contexto(
-                       'Dom/Feriado', contexto.is_domingo(), self.__horarios_domingo_ida, contexto))
+        str_horarios = f'''
+        *\U0001F68C {self.get_descricao_linha()}*
+        \U0001F4CD {self.__desc_terminal_ida}
+        {Horarios.get_desc_dia_contexto(
+                       'Dia útil', contexto.is_dia_util(), self.__horarios_dia_util_ida, contexto)}
+        {Horarios.get_desc_dia_contexto(
+                       'Sábado', contexto.is_sabado(), self.__horarios_sabado_ida, contexto)}
+        {Horarios.get_desc_dia_contexto(
+                       'Dom/Feriado', contexto.is_domingo(), self.__horarios_domingo_ida, contexto)}
+        '''
 
         if not self.is_circular():
-            str_horarios += '''
-        \U0001F4CD {}
-        {}
-        {}
-        {}
-        '''.format(self.__desc_terminal_volta,
-                   Horarios.get_desc_dia_contexto(
+            str_horarios += f'''
+        \U0001F4CD {self.__desc_terminal_volta}
+        {Horarios.get_desc_dia_contexto(
                        'Dia útil', contexto.is_dia_util(), self.__horarios_dia_util_volta,
-                       contexto),
-                   Horarios.get_desc_dia_contexto(
+                       contexto)}
+        {Horarios.get_desc_dia_contexto(
                        'Sábado', contexto.is_sabado(), self.__horarios_sabado_volta,
-                       contexto),
-                   Horarios.get_desc_dia_contexto(
+                       contexto)}
+        {Horarios.get_desc_dia_contexto(
                        'Dom/Feriado', contexto.is_domingo(), self.__horarios_domingo_volta,
-                       contexto))
+                       contexto)}
+        '''
 
         if contexto.orientacoes.intersection(self.__observacoes):
             str_horarios += '''
         \U00002757 OBSERVAÇÃO
         '''
             for item in sorted(contexto.orientacoes.intersection(self.__observacoes)):
-                str_horarios += '''{}: {}
-        '''.format(item, self.__observacoes[item])
+                str_horarios += f'''{item}: {self.__observacoes[item]}
+        '''
 
         return str_horarios
 
     def __str__(self):
-        return '''
-            linha: {}
-            ida: {}
-            UTS: {}    SAB: {}    DOM: {}
-            volta: {}
-            UTS: {}    SAB: {}    DOM: {}
-            '''.format(self.get_descricao_linha(),
-                       self.__desc_terminal_ida,
-                       len(self.__horarios_dia_util_ida),
-                       len(self.__horarios_sabado_ida),
-                       len(self.__horarios_domingo_ida),
-                       self.__desc_terminal_volta,
-                       len(self.__horarios_dia_util_volta),
-                       len(self.__horarios_sabado_volta),
-                       len(self.__horarios_domingo_volta))
+        return f'''
+            linha: {self.get_descricao_linha()}
+            ida: {self.__desc_terminal_ida}
+            UTS: {len(self.__horarios_dia_util_ida)}\tSAB: {len(self.__horarios_sabado_ida)}\tDOM: {len(self.__horarios_domingo_ida)}
+            volta: {self.__desc_terminal_volta}
+            UTS: {len(self.__horarios_dia_util_volta)}\tSAB: {len(self.__horarios_sabado_volta)}\tDOM: {len(self.__horarios_domingo_volta)}
+            '''
 
 
 class HoraPartida():

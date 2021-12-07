@@ -7,7 +7,6 @@ from tests.base import Base
 from app.utils import is_feriado
 
 
-@freeze_time("2020-01-01")
 class TestUtils(Base):
 
     @staticmethod
@@ -18,4 +17,5 @@ class TestUtils(Base):
                                               ('23/12', False),
                                               ('25/12', True)])
     def test_is_feriado(data, feriado):
-        assert is_feriado(data) == feriado
+        with freeze_time("2020-01-01"):
+            assert is_feriado(data) == feriado

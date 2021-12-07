@@ -20,4 +20,4 @@ class DadosTeste():
 
     @staticmethod
     def get_random_linha_inexistente():
-        return random.randrange(0, 300, 1)
+        return random.randrange(5000, 6000, 1)

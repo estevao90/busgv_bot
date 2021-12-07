@@ -3,20 +3,20 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
-[dev-packages]
-autopep8 = "~=1.5"
-pylint = "~=2.6"
-pylint-quotes = "~=0.2"
-pytest = "~=6.1"
-pytest-mock = "~=3.3"
-Faker = "~=4.9"
-freezegun = "~=1.0.0"
-rope = "~=0.18.0"
-
 [packages]
-requests = "~=2.24"
-pytz = ">=2020"
-workalendar = "~=12.1.0"
+requests = ">=2"
+pytz = ">=2021.3"
+workalendar = ">=16"
+
+[dev-packages]
+autopep8 = ">=1"
+pylint = ">=2"
+pylint-quotes = ">=0.2"
+pytest = ">=6"
+pytest-mock = ">=3"
+Faker = ">=9"
+freezegun = ">=1"
+rope = ">=0.22"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9"

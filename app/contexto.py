@@ -64,12 +64,9 @@ class Contexto():
                 self.feriado is not None)
 
     def __str__(self):
-        return '''
-        qtde_horarios: {}
-        hora_atual: {}
-        dia_semana: {}
-        feriado: {}
-        '''.format(self.qtde_horarios,
-                   self.hora_atual,
-                   self.dia_semana,
-                   self.feriado)
+        return f'''
+        qtde_horarios: {self.qtde_horarios}
+        hora_atual: {self.hora_atual}
+        dia_semana: {self.dia_semana}
+        feriado: {self.feriado}
+        '''
